@@ -1,8 +1,12 @@
+import { useState } from "react";
 import "./App.css";
 import GameScreen from "./components/GameScreen";
 import StartScreen from "./components/StartScreen";
 
 function App() {
+  const [gameState, setGameState] = useState(0);
+  // 0 = start state; 1 = game state; 2 = end
+
   return (
     <div className="App">
       <hr></hr>
@@ -13,8 +17,15 @@ function App() {
           <div className="boxes right">!</div>
         </div>
         <div className="content">
-          {/* <GameScreen /> */}
-          <StartScreen />
+          {gameState === 0 ? (
+            <StartScreen
+              startFunction={() => {
+                setGameState(1);
+              }}
+            />
+          ) : (
+            <GameScreen />
+          )}
         </div>
       </div>
       <hr></hr>

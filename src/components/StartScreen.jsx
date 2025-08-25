@@ -1,12 +1,12 @@
 import Button from "./Button";
 import "./StartScreen.css";
 
-const StartScreen = () => {
+const StartScreen = ({ startFunction }) => {
   return (
     <>
       <h1>Title</h1>
       <div className="photo"></div>
-      <Button btnType={"big"} btnText={"Start"} />
+      <Button btnType={"big"} btnText={"Start"} onClick={startFunction} />
     </>
   );
 };
