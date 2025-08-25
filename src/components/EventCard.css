@@ -1,0 +1,18 @@
+.eventCard {
+  height: 80%;
+  width: 75%;
+  background-color: #f6c4cc;
+  border: 4px solid black;
+  border-radius: 2.5vh;
+  margin: auto;
+  text-align: center;
+}
+
+.eventCard:hover {
+  background-color: #fffedf;
+  cursor: pointer;
+}
+
+.eventCard > h2 {
+  margin: auto;
+}
