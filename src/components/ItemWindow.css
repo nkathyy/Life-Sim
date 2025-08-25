@@ -1,0 +1,40 @@
+.windowWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.itemWindow {
+  margin: auto;
+  width: 85%;
+  max-width: 350px;
+  aspect-ratio: 147 / 158;
+  border: 4px solid black;
+  padding: 0;
+  background-color: #fdfdfd;
+}
+
+.windowBar {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #fafc97;
+  border-bottom: 4px solid black;
+}
+
+.windowBar > .boxes {
+  background-color: #f6c4cc;
+  border-left: 4px solid black;
+}
+
+.itemContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
