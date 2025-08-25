@@ -1,4 +1,5 @@
 import "./App.css";
+import GameScreen from "./components/GameScreen";
 import StartScreen from "./components/StartScreen";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <div className="boxes right">!</div>
         </div>
         <div className="content">
+          {/* <GameScreen /> */}
           <StartScreen />
         </div>
       </div>
