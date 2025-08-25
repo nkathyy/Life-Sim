@@ -55,6 +55,10 @@ h3 {
   border-left: 4px solid black;
 }
 
+.right:hover {
+  cursor: pointer;
+}
+
 .content {
   width: 100%;
   height: 100%;
