@@ -4,7 +4,7 @@ import OutWindow from "./OutWindow";
 import { useState } from "react";
 
 const GameScreen = () => {
-  const [isOutWindowOpen, setIsOutWindowOpen] = useState(true);
+  const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
 
   const openOutWindow = () => {
     setIsOutWindowOpen(true);
