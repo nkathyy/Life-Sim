@@ -15,8 +15,8 @@ const DetailCard = ({
         <h2>{itemName}</h2>
         <p>{itemDescription}</p>
         <div className="cardButtons">
-          <Button btnType={"big"} btnText={"test"} onClick={() => {}} />
-          <Button btnType={"big"} btnText={"Cancel"} onClick={onClick} />
+          <Button btnType={"small"} btnText={"test"} onClick={() => {}} />
+          <Button btnType={"small"} btnText={"Cancel"} onClick={onClick} />
         </div>
       </div>
     </div>
