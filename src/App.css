@@ -44,6 +44,7 @@ h4 {
   height: 100%;
   aspect-ratio: 1.1 / 1;
   background-color: #fafc97;
+  text-align: center;
 }
 
 .left {

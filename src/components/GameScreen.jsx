@@ -1,13 +1,12 @@
 import EventCard from "./EventCard";
 import "./GameScreen.css";
+import MessageBox from "./MessageBox";
 import OutWindow from "./OutWindow";
 import ShopWindow from "./ShopWindow";
 import { useState } from "react";
 
 const GameScreen = () => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
-  const [isShopWindowOpen, setIsShopWindowOpen] = useState(false);
-
   const openOutWindow = () => {
     setIsOutWindowOpen(true);
   };
@@ -16,6 +15,7 @@ const GameScreen = () => {
     setIsOutWindowOpen(false);
   };
 
+  const [isShopWindowOpen, setIsShopWindowOpen] = useState(false);
   const openShopWindow = () => {
     setIsShopWindowOpen(true);
   };
@@ -24,8 +24,22 @@ const GameScreen = () => {
     setIsShopWindowOpen(false);
   };
 
+  const [isMsgOpen, setIsMsgOpen] = useState(false);
+  const openMsgBox = () => {
+    setIsMsgOpen(true);
+  };
+
+  const closeMsgBox = () => {
+    setIsMsgOpen(false);
+  };
+
   return (
     <>
+      <MessageBox
+        isMsgOpen={isMsgOpen}
+        msg={`This is a test message for testing a long sentence. test`}
+        closeWindow={closeMsgBox}
+      />
       <OutWindow
         isOutWindowOpen={isOutWindowOpen}
         closeWindow={closeOutWindow}
