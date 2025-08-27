@@ -4,7 +4,7 @@ import DetailCard from "./DetailCard";
 import { useState } from "react";
 
 const ItemWindow = ({ isWindowOpen, itemList, windowTitle, closeWindow }) => {
-  const [selectedItem, setSelectedItem] = useState(0); //item index
+  const [selectedItem, setSelectedItem] = useState(1); //item index
   const [isOpenDetailCard, setIsOpenDetailCard] = useState(false);
 
   const updateSelectedItem = (index) => {
@@ -12,7 +12,6 @@ const ItemWindow = ({ isWindowOpen, itemList, windowTitle, closeWindow }) => {
       setSelectedItem(index);
       setIsOpenDetailCard(true);
     }
-    console.log(index);
   };
 
   return (
@@ -23,9 +22,9 @@ const ItemWindow = ({ isWindowOpen, itemList, windowTitle, closeWindow }) => {
       <div className="itemWindow">
         <DetailCard
           style={{ display: isOpenDetailCard ? "flex" : "none" }}
-          itemImgSrc={itemList[selectedItem].itemImgSrc}
-          itemName={itemList[selectedItem].itemName}
-          itemDescription={itemList[selectedItem].itemDescription}
+          itemImgSrc={itemList[selectedItem - 1].itemImgSrc}
+          itemName={itemList[selectedItem - 1].itemName}
+          itemDescription={itemList[selectedItem - 1].itemDescription}
           onClick={() => {
             setIsOpenDetailCard(false);
           }}
