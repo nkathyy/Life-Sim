@@ -3,9 +3,10 @@ import "./App.css";
 import GameScreen from "./components/GameScreen";
 import StartScreen from "./components/StartScreen";
 import MessageBox from "./components/MessageBox";
+import EndingScreen from "./components/EndingScreen";
 
 function App() {
-  const [gameState, setGameState] = useState(0);
+  const [gameState, setGameState] = useState(2);
   // 0 = start state; 1 = game state; 2 = end
 
   const [isMsgOpen, setIsMsgOpen] = useState(false);
@@ -40,8 +41,14 @@ function App() {
                 setGameState(1);
               }}
             />
-          ) : (
+          ) : gameState === 1 ? (
             <GameScreen />
+          ) : (
+            <EndingScreen
+              retryFunction={() => {
+                setGameState(0);
+              }}
+            />
           )}
         </div>
       </div>
