@@ -31,7 +31,7 @@ const ItemWindow = ({ isWindowOpen, itemList, windowTitle, closeWindow }) => {
         />
         <div className="windowBar">
           <h2>{windowTitle}</h2>
-          <div className="boxes" onClick={closeWindow}>
+          <div className="boxes right" onClick={closeWindow}>
             X
           </div>
         </div>
