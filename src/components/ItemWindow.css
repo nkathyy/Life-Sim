@@ -27,6 +27,7 @@
   justify-content: space-between;
   background-color: #fafc97;
   border-bottom: 4px solid black;
+  padding-left: 3%;
 }
 
 .windowBar > .boxes {
