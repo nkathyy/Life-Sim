@@ -4,10 +4,13 @@ import GameScreen from "./components/GameScreen";
 import StartScreen from "./components/StartScreen";
 import MessageBox from "./components/MessageBox";
 import EndingScreen from "./components/EndingScreen";
+import { systemStat } from "./constants/systemStat.js";
 
 function App() {
   const [gameState, setGameState] = useState(2);
   // 0 = start state; 1 = game state; 2 = end
+
+  const [gameSystemData, setGameSystemData] = useState(systemStat);
 
   const [isMsgOpen, setIsMsgOpen] = useState(false);
   const openMsgBox = () => {
@@ -29,7 +32,13 @@ function App() {
       <div className="mainContainer">
         <div className="topBar">
           <div className="boxes left"></div>
-          <h1>title</h1>
+          <h1>
+            {gameState === 0
+              ? "Start"
+              : gameState === 1
+              ? `Day ${gameSystemData.day}`
+              : `Ending ${gameSystemData.ending}`}
+          </h1>
           <div className="boxes right" onClick={openMsgBox}>
             !
           </div>
