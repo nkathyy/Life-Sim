@@ -1,27 +1,26 @@
 import ItemWindow from "./ItemWindow";
+import { eventStat } from "../constants/eventStat.js";
 
-const testList = [
-  {
-    index: 1,
-    itemImgSrc: "",
-    itemName: "test name",
-    itemDescription: "test description",
-  },
-  {
-    index: 2,
-    itemImgSrc: "",
-    itemName: "test name 2",
-    itemDescription: "test description 2",
-  },
-];
-
-const OutWindow = ({ isOutWindowOpen, closeWindow }) => {
+const OutWindow = ({
+  isOutWindowOpen,
+  closeWindow,
+  openMsgBox,
+  gameSystemData,
+  updateSystemData,
+  charData,
+  updateCharData,
+}) => {
   return (
     <ItemWindow
       isWindowOpen={isOutWindowOpen}
-      itemList={testList}
+      itemList={eventStat}
       windowTitle={"OUT"}
       closeWindow={closeWindow}
+      openMsgBox={openMsgBox}
+      gameSystemData={gameSystemData}
+      updateSystemData={updateSystemData}
+      charData={charData}
+      updateCharData={updateCharData}
     />
   );
 };

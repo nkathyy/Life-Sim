@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import GameScreen from "./components/GameScreen";
-import StartScreen from "./components/StartScreen";
+import GameScreen from "./screens/GameScreen";
+import StartScreen from "./screens/StartScreen";
 import MessageBox from "./components/MessageBox";
-import EndingScreen from "./components/EndingScreen";
+import EndingScreen from "./screens/EndingScreen";
 import { systemStat } from "./constants/systemStat.js";
 
 function App() {
@@ -51,7 +51,10 @@ function App() {
               }}
             />
           ) : gameState === 1 ? (
-            <GameScreen />
+            <GameScreen
+              gameSystemData={gameSystemData}
+              updateSystemData={setGameSystemData}
+            />
           ) : (
             <EndingScreen
               retryFunction={() => {

@@ -1,6 +1,6 @@
 export const baseData = [
-  { index: 0, name: "coins", value: 0, displayName: "金幣" },
-  { index: 1, name: "happiness", value: 200, displayName: "happiness" },
+  { index: 0, name: "coins", value: 200, displayName: "金幣" },
+  { index: 1, name: "happiness", value: 1, displayName: "happiness" },
   { index: 2, name: "beauty", value: 1, displayName: "beauty" },
   { index: 3, name: "sport", value: 1, displayName: "sport" },
   { index: 4, name: "magic", value: 1, displayName: "magic" },

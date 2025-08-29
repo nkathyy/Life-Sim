@@ -1,13 +1,13 @@
 import "./ItemCard.css";
 
-const ItemCard = ({ itemImgSrc, itemIndex, onClick }) => {
+const ItemCard = ({ item, onClick }) => {
   function updateItem() {
-    onClick(itemIndex);
+    onClick(item.index);
   }
 
   return (
     <div className="itemCard" onClick={updateItem}>
-      <img src={itemImgSrc} alt="item"></img>
+      <img src={item.itemImgSrc} alt="item"></img>
     </div>
   );
 };

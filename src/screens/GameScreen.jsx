@@ -36,8 +36,13 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
   };
 
   const [isMsgOpen, setIsMsgOpen] = useState(false);
-  const openMsgBox = () => {
+  const [msgBoxLine, setMsgBoxLine] = useState("");
+  const openMsgBox = ({ line }) => {
     setIsMsgOpen(true);
+
+    setMsgBoxLine(line);
+    console.log(line);
+    console.log(msgBoxLine);
   };
 
   const closeMsgBox = () => {
@@ -48,11 +53,6 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
 
   return (
     <>
-      <MessageBox
-        isMsgOpen={isMsgOpen}
-        msg={`This is a test message for testing a long sentence. test`}
-        closeWindow={closeMsgBox}
-      />
       <DataWindow
         DataList={charData}
         isDataWindowOpen={isDataWindowOpen}
@@ -61,10 +61,20 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
       <OutWindow
         isOutWindowOpen={isOutWindowOpen}
         closeWindow={closeOutWindow}
+        openMsgBox={openMsgBox}
+        gameSystemData={gameSystemData}
+        updateSystemData={updateSystemData}
+        charData={charData}
+        updateCharData={setCharData}
       />
       <ShopWindow
         isShopWindowOpen={isShopWindowOpen}
         closeWindow={closeShopWindow}
+      />
+      <MessageBox
+        isMsgOpen={isMsgOpen}
+        msg={msgBoxLine}
+        closeWindow={closeMsgBox}
       />
       <div className="charContainer"></div>
       <div className="eventContainer">
