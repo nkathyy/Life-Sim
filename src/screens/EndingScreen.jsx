@@ -1,5 +1,5 @@
 import "./EndingScreen.css";
-import Button from "./Button";
+import Button from "../components/Button";
 
 const EndingScreen = ({ retryFunction }) => {
   return (

@@ -1,13 +1,13 @@
-import EventCard from "./EventCard";
+import EventCard from "../components/EventCard.jsx";
 import "./GameScreen.css";
-import MessageBox from "./MessageBox";
-import OutWindow from "./OutWindow";
-import ShopWindow from "./ShopWindow";
+import MessageBox from "../components/MessageBox.jsx";
+import OutWindow from "../components/OutWindow.jsx";
+import ShopWindow from "../components/ShopWindow.jsx";
 import { useState } from "react";
 import { baseData } from "../constants/baseData.js";
-import DataWindow from "./DataWindow.jsx";
+import DataWindow from "../components/DataWindow.jsx";
 
-const GameScreen = () => {
+const GameScreen = ({ gameSystemData, updateSystemData }) => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
   const openOutWindow = () => {
     setIsOutWindowOpen(true);
