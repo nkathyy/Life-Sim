@@ -14,6 +14,8 @@ const ItemWindow = ({
   updateSystemData,
   charData,
   updateCharData,
+  bag,
+  setBag,
 }) => {
   const [selectedItem, setSelectedItem] = useState(1); //item index
   const [isOpenDetailCard, setIsOpenDetailCard] = useState(false);
@@ -47,9 +49,71 @@ const ItemWindow = ({
     updateCharData(newCharData);
     updateSelectedItem(-1);
 
-    // openMsgBox({ line: "tesing" });
-
     openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
+  }
+
+  function updateShopedStat() {
+    if (itemList[selectedItem].price > charData[0].value) {
+      openMsgBox({ line: "Do not have enough money" });
+      return;
+    }
+
+    if (itemList[selectedItem].index === 8) {
+      const randomAddNum = Math.floor(Math.random() * 2) + 7;
+      let newCharData = charData.map((data) => {
+        return {
+          index: data.index,
+          name: data.name,
+          value:
+            data.index !== 0
+              ? Number(randomAddNum + data.value)
+              : Number(data.value - itemList[selectedItem].price),
+          displayName: data.displayName,
+        };
+      });
+      updateCharData(newCharData);
+      updateSelectedItem(-1);
+
+      openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
+    } else if ([5, 6, 7].find((num) => num === itemList[selectedItem].index)) {
+      const randomAddNum = Math.floor(Math.random() * 2) + 10;
+      let newCharData = charData.map((data) => {
+        return itemList[selectedItem].dataNameList.find(
+          (name) => name === data.name
+        )
+          ? {
+              index: data.index,
+              name: data.name,
+              value:
+                data.index !== 0
+                  ? Number(randomAddNum + data.value)
+                  : Number(data.value - itemList[selectedItem].price),
+              displayName: data.displayName,
+            }
+          : data;
+      });
+      updateCharData(newCharData);
+      updateSelectedItem(-1);
+
+      openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
+    } else {
+      setBag([...bag, itemList[selectedItem].index]);
+
+      let newCharData = charData.map((data) => {
+        return data.name === "coins"
+          ? {
+              index: data.index,
+              name: data.name,
+              value: Number(data.value - itemList[selectedItem].price),
+              displayName: data.displayName,
+            }
+          : data;
+      });
+      updateCharData(newCharData);
+      updateSelectedItem(-1);
+
+      openMsgBox({ line: itemList[selectedItem].result() });
+    }
   }
 
   return (
@@ -66,7 +130,7 @@ const ItemWindow = ({
               setIsOpenDetailCard(false);
             }}
             updateDailyWorkStat={
-              updateDailyWorkStat ? updateDailyWorkStat : () => {}
+              windowTitle === "OUT" ? updateDailyWorkStat : updateShopedStat
             }
           />
         ) : (

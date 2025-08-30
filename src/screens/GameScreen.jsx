@@ -50,6 +50,7 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
   };
 
   const [charData, setCharData] = useState(baseData);
+  const [bag, setBag] = useState([]);
 
   return (
     <>
@@ -70,6 +71,13 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
       <ShopWindow
         isShopWindowOpen={isShopWindowOpen}
         closeWindow={closeShopWindow}
+        openMsgBox={openMsgBox}
+        gameSystemData={gameSystemData}
+        updateSystemData={updateSystemData}
+        charData={charData}
+        updateCharData={setCharData}
+        bag={bag}
+        setBag={setBag}
       />
       <MessageBox
         isMsgOpen={isMsgOpen}

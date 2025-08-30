@@ -1,27 +1,30 @@
 import ItemWindow from "./ItemWindow";
+import { shopItemStat } from "../constants/shopItemStat.js";
 
-const testList = [
-  {
-    index: 1,
-    itemImgSrc: "",
-    itemName: "test name",
-    itemDescription: "test description",
-  },
-  {
-    index: 2,
-    itemImgSrc: "",
-    itemName: "test name 2",
-    itemDescription: "test description 2",
-  },
-];
-
-const ShopWindow = ({ isShopWindowOpen, closeWindow }) => {
+const ShopWindow = ({
+  isShopWindowOpen,
+  closeWindow,
+  openMsgBox,
+  gameSystemData,
+  updateSystemData,
+  charData,
+  updateCharData,
+  bag,
+  setBag,
+}) => {
   return (
     <ItemWindow
       isWindowOpen={isShopWindowOpen}
-      itemList={testList}
+      itemList={shopItemStat}
       windowTitle={"SHOP"}
       closeWindow={closeWindow}
+      openMsgBox={openMsgBox}
+      gameSystemData={gameSystemData}
+      updateSystemData={updateSystemData}
+      charData={charData}
+      updateCharData={updateCharData}
+      bag={bag}
+      setBag={setBag}
     />
   );
 };

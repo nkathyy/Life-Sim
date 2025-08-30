@@ -1,6 +1,6 @@
 import "./ItemCard.css";
 
-const ItemCard = ({ item, onClick }) => {
+const ItemCard = ({ item, onClick, bag }) => {
   function updateItem() {
     onClick(item.index);
   }
