@@ -18,5 +18,6 @@
 }
 
 .sold:hover {
+  background-color: #8b7276;
   cursor: not-allowed;
 }

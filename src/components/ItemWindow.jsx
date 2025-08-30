@@ -75,7 +75,7 @@ const ItemWindow = ({
       updateSelectedItem(-1);
 
       openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
-    } else if ([5, 6, 7].find((num) => num === itemList[selectedItem].index)) {
+    } else if ([5, 6, 7].some((num) => num === itemList[selectedItem].index)) {
       const randomAddNum = Math.floor(Math.random() * 2) + 10;
       let newCharData = charData.map((data) => {
         return itemList[selectedItem].dataNameList.find(
@@ -147,8 +147,10 @@ const ItemWindow = ({
             {itemList.map((item) => (
               <ItemCard
                 key={item.index}
+                windowType={windowTitle === "OUT" ? "OUT" : "SHOP"}
                 item={item}
                 onClick={updateSelectedItem}
+                bag={bag}
               />
             ))}
           </div>
