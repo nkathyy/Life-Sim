@@ -78,16 +78,21 @@ const ItemWindow = ({
     } else if ([5, 6, 7].some((num) => num === itemList[selectedItem].index)) {
       const randomAddNum = Math.floor(Math.random() * 2) + 10;
       let newCharData = charData.map((data) => {
-        return itemList[selectedItem].dataNameList.find(
+        return itemList[selectedItem].dataNameList.some(
           (name) => name === data.name
         )
           ? {
               index: data.index,
               name: data.name,
-              value:
-                data.index !== 0
-                  ? Number(randomAddNum + data.value)
-                  : Number(data.value - itemList[selectedItem].price),
+              value: Number(randomAddNum + data.value),
+
+              displayName: data.displayName,
+            }
+          : data.index === 0
+          ? {
+              index: data.index,
+              name: data.name,
+              value: Number(data.value - itemList[selectedItem].price),
               displayName: data.displayName,
             }
           : data;
