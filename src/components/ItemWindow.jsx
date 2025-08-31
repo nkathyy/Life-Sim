@@ -122,57 +122,57 @@ const ItemWindow = ({
   }
 
   return (
-    <div
-      style={{ display: isWindowOpen ? "flex" : "none" }}
-      className="windowWrapper"
-    >
-      <div className="itemWindow">
-        {itemList != null ? (
-          <DetailCard
-            style={{ display: isOpenDetailCard ? "flex" : "none" }}
-            item={itemList[selectedItem]}
-            closeWindow={() => {
-              setIsOpenDetailCard(false);
-            }}
-            updateDailyWorkStat={
-              windowTitle === "OUT" ? updateDailyWorkStat : updateBuyItemStat
-            }
-          />
-        ) : (
-          ""
-        )}
-        <div className="windowBar">
-          <h2>{windowTitle}</h2>
-          <div className="boxes right" onClick={closeWindow}>
-            X
+    isWindowOpen && (
+      <div className="windowWrapper">
+        <div className="itemWindow">
+          {itemList != null
+            ? isOpenDetailCard && (
+                <DetailCard
+                  item={itemList[selectedItem]}
+                  closeWindow={() => {
+                    setIsOpenDetailCard(false);
+                  }}
+                  updateDailyWorkStat={
+                    windowTitle === "OUT"
+                      ? updateDailyWorkStat
+                      : updateBuyItemStat
+                  }
+                />
+              )
+            : ""}
+          <div className="windowBar">
+            <h2>{windowTitle}</h2>
+            <div className="boxes right" onClick={closeWindow}>
+              X
+            </div>
           </div>
-        </div>
-        {itemList != null ? (
-          <div className="itemContent">
-            {itemList.map((item) => (
-              <ItemCard
-                key={item.index}
-                windowType={windowTitle === "OUT" ? "OUT" : "SHOP"}
-                item={item}
-                onClick={updateSelectedItem}
-                bag={bag}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="dataContent">
-            {DataList.map((data) => (
-              <div className="dataLine" key={data.index}>
-                <div>
-                  <b>{data.displayName}</b>
+          {itemList != null ? (
+            <div className="itemContent">
+              {itemList.map((item) => (
+                <ItemCard
+                  key={item.index}
+                  windowType={windowTitle === "OUT" ? "OUT" : "SHOP"}
+                  item={item}
+                  onClick={updateSelectedItem}
+                  bag={bag}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="dataContent">
+              {DataList.map((data) => (
+                <div className="dataLine" key={data.index}>
+                  <div>
+                    <b>{data.displayName}</b>
+                  </div>
+                  <div>{data.value}</div>
                 </div>
-                <div>{data.value}</div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
