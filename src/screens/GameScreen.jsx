@@ -3,11 +3,11 @@ import "./GameScreen.css";
 import MessageBox from "../components/MessageBox.jsx";
 import OutWindow from "../components/OutWindow.jsx";
 import ShopWindow from "../components/ShopWindow.jsx";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { baseData } from "../constants/baseData.js";
 import DataWindow from "../components/DataWindow.jsx";
 
-const GameScreen = ({ gameSystemData, updateSystemData }) => {
+const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
   const openOutWindow = () => {
     setIsOutWindowOpen(true);
@@ -37,13 +37,11 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
 
   const [isMsgOpen, setIsMsgOpen] = useState(false);
   const [msgBoxLine, setMsgBoxLine] = useState("");
-  const openMsgBox = ({ line }) => {
+  const openMsgBox = useCallback(({ line }) => {
     setIsMsgOpen(true);
 
     setMsgBoxLine(line);
-    console.log(line);
-    console.log(msgBoxLine);
-  };
+  }, []);
 
   const closeMsgBox = () => {
     setIsMsgOpen(false);
@@ -51,6 +49,63 @@ const GameScreen = ({ gameSystemData, updateSystemData }) => {
 
   const [charData, setCharData] = useState(baseData);
   const [bag, setBag] = useState([]);
+
+  const closeAllWindow = useCallback(
+    (message) => {
+      closeOutWindow();
+      closeShopWindow();
+      closeDataWindow();
+      openMsgBox({ line: message });
+      console.log(message);
+    },
+    [openMsgBox]
+  );
+
+  useEffect(() => {
+    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day < 3) {
+      const newStat = gameSystemData.day + 1;
+      updateSystemData({
+        day: newStat,
+        dailyWorkTimes: 0,
+        dateTimes: 0,
+        ending: 0,
+      });
+
+      let newCharData = charData.map((data) => {
+        return data.index === 0
+          ? {
+              index: data.index,
+              name: data.name,
+              value: Number(data.value + 200),
+              displayName: data.displayName,
+            }
+          : data;
+      });
+      setCharData(newCharData);
+
+      closeAllWindow("Day updated. Added 200 coins.");
+    } else if (
+      gameSystemData.dailyWorkTimes === 3 &&
+      gameSystemData.day === 3
+    ) {
+      const ending = () => {
+        return 0;
+      };
+      updateSystemData({
+        day: 1,
+        dailyWorkTimes: 0,
+        dateTimes: 0,
+        ending: ending(),
+      });
+      toEndingFunction();
+    }
+  }, [
+    gameSystemData,
+    updateSystemData,
+    toEndingFunction,
+    closeAllWindow,
+    charData,
+  ]);
 
   return (
     <>

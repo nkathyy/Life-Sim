@@ -54,6 +54,9 @@ function App() {
             <GameScreen
               gameSystemData={gameSystemData}
               updateSystemData={setGameSystemData}
+              toEndingFunction={() => {
+                setGameState(2);
+              }}
             />
           ) : (
             <EndingScreen
