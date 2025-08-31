@@ -68,7 +68,6 @@ export const shopItemData = [
     displayName: "不知名的藥水",
     imgSrc: "",
     price: 200,
-    result: (number) =>
-      `Bought Bottled Medicine. Added ${number} happiness, beauty, and magic.`,
+    result: (number) => `Bought 不知名的藥水. Added ${number} on all fields.`,
   },
 ];
