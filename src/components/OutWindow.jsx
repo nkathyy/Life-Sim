@@ -1,5 +1,5 @@
 import ItemWindow from "./ItemWindow";
-import { eventStat } from "../constants/eventStat.js";
+import { eventData } from "../constants/eventData.js";
 
 const OutWindow = ({
   isOutWindowOpen,
@@ -13,7 +13,7 @@ const OutWindow = ({
   return (
     <ItemWindow
       isWindowOpen={isOutWindowOpen}
-      itemList={eventStat}
+      itemList={eventData}
       windowTitle={"OUT"}
       closeWindow={closeWindow}
       openMsgBox={openMsgBox}

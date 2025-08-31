@@ -1,4 +1,4 @@
-export const eventStat = [
+export const eventData = [
   {
     index: 0,
     name: "work",

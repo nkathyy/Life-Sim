@@ -1,5 +1,5 @@
 import ItemWindow from "./ItemWindow";
-import { shopItemStat } from "../constants/shopItemStat.js";
+import { shopItemData } from "../constants/shopItemData.js";
 
 const ShopWindow = ({
   isShopWindowOpen,
@@ -15,7 +15,7 @@ const ShopWindow = ({
   return (
     <ItemWindow
       isWindowOpen={isShopWindowOpen}
-      itemList={shopItemStat}
+      itemList={shopItemData}
       windowTitle={"SHOP"}
       closeWindow={closeWindow}
       openMsgBox={openMsgBox}

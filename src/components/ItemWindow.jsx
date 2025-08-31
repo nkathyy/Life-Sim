@@ -52,7 +52,7 @@ const ItemWindow = ({
     openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
   }
 
-  function updateShopedStat() {
+  function updateBuyItemStat() {
     if (itemList[selectedItem].price > charData[0].value) {
       openMsgBox({ line: "Do not have enough money" });
       return;
@@ -135,7 +135,7 @@ const ItemWindow = ({
               setIsOpenDetailCard(false);
             }}
             updateDailyWorkStat={
-              windowTitle === "OUT" ? updateDailyWorkStat : updateShopedStat
+              windowTitle === "OUT" ? updateDailyWorkStat : updateBuyItemStat
             }
           />
         ) : (

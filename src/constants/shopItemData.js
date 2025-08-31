@@ -1,4 +1,4 @@
-export const shopItemStat = [
+export const shopItemData = [
   {
     index: 0,
     name: "angel",
