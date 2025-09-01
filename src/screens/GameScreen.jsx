@@ -6,6 +6,7 @@ import ShopWindow from "../components/ShopWindow.jsx";
 import { useEffect, useState, useCallback } from "react";
 import { baseData } from "../constants/baseData.js";
 import DataWindow from "../components/DataWindow.jsx";
+import { dailyDateData } from "../constants/dateData.js";
 
 const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
@@ -61,6 +62,7 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
     [openMsgBox]
   );
 
+  //day update
   useEffect(() => {
     if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day < 3) {
       const newStat = gameSystemData.day + 1;
@@ -107,6 +109,31 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
     charData,
   ]);
 
+  //dailyDate process
+  function dailyDateProcess() {
+    if (gameSystemData.dateTimes >= 2) {
+      openMsgBox({ line: "you can only date twice a day." });
+      return;
+    }
+    const dateIndex = Math.floor(Math.random() * 8);
+    const randomAddNum = Math.floor(Math.random() * 2) + 5;
+    const currentDate = dailyDateData[dateIndex];
+
+    let newCharData = charData.map((data) => {
+      return data.name === currentDate.dataName
+        ? {
+            index: data.index,
+            name: data.name,
+            value: Number(data.value + randomAddNum),
+            displayName: data.displayName,
+          }
+        : data;
+    });
+    setCharData(newCharData);
+
+    openMsgBox({ line: currentDate.result(randomAddNum) });
+  }
+
   return (
     <>
       <DataWindow
@@ -143,7 +170,7 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       <div className="eventContainer">
         <EventCard title={"Sample"} onClick={openOutWindow} />
         <EventCard title={"例子"} onClick={openShopWindow} />
-        <EventCard title={"例子"} />
+        <EventCard title={"例子"} onClick={dailyDateProcess} />
         <EventCard title={"Sample"} onClick={openDataWindow} />
       </div>
     </>
