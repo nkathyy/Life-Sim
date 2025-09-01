@@ -21,6 +21,7 @@ export const eventData = [
     displayName: "fu mask",
     dataName: "beauty",
     imgSrc: "",
+    result: (number) => `fu mask. added ${number} on beauty`,
   },
   {
     index: 3,
