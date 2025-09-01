@@ -7,6 +7,7 @@ import { useEffect, useState, useCallback } from "react";
 import { baseData } from "../constants/baseData.js";
 import DataWindow from "../components/DataWindow.jsx";
 import { dailyDateData } from "../constants/dateData.js";
+import { getEnding } from "../components/ending.js";
 
 const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
@@ -90,14 +91,12 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       gameSystemData.dailyWorkTimes === 3 &&
       gameSystemData.day === 3
     ) {
-      const ending = () => {
-        return 0;
-      };
+      const ending = getEnding(charData);
       updateSystemData({
         day: 1,
         dailyWorkTimes: 0,
         dateTimes: 0,
-        ending: ending(),
+        ending: ending,
       });
       toEndingFunction();
     }

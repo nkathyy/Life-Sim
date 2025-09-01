@@ -37,7 +37,7 @@ function App() {
               ? "Start"
               : gameState === 1
               ? `Day ${gameSystemData.day}`
-              : `Ending ${gameSystemData.ending}`}
+              : `Ending ${gameSystemData.ending + 1}`}
           </h1>
           <div className="boxes right" onClick={openMsgBox}>
             !
@@ -63,6 +63,7 @@ function App() {
               retryFunction={() => {
                 setGameState(0);
               }}
+              endingIndex={gameSystemData.ending}
             />
           )}
         </div>
