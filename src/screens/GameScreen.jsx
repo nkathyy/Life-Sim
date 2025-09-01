@@ -124,7 +124,7 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       ending: 0,
     });
 
-    const dateIndex = Math.floor(Math.random() * 8);
+    const dateIndex = Math.floor(Math.random() * dailyDateData.length);
     const randomAddNum = Math.floor(Math.random() * 2) + 5;
     const currentDate = dailyDateData[dateIndex];
 
