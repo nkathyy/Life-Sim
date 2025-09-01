@@ -115,6 +115,15 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       openMsgBox({ line: "you can only date twice a day." });
       return;
     }
+
+    const newStat = gameSystemData.dateTimes + 1;
+    updateSystemData({
+      day: gameSystemData.day,
+      dailyWorkTimes: gameSystemData.dailyWorkTimes,
+      dateTimes: newStat,
+      ending: 0,
+    });
+
     const dateIndex = Math.floor(Math.random() * 8);
     const randomAddNum = Math.floor(Math.random() * 2) + 5;
     const currentDate = dailyDateData[dateIndex];
