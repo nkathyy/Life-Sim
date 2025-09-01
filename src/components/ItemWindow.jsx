@@ -49,7 +49,14 @@ const ItemWindow = ({
     updateCharData(newCharData);
     updateSelectedItem(-1);
 
-    openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
+    if (gameSystemData.dailyWorkTimes === 2) {
+      openMsgBox({
+        line: itemList[selectedItem].result(randomAddNum),
+        type: "dayChange",
+      });
+    } else {
+      openMsgBox({ line: itemList[selectedItem].result(randomAddNum) });
+    }
   }
 
   function updateBuyItemStat() {

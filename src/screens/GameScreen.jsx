@@ -39,10 +39,11 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
 
   const [isMsgOpen, setIsMsgOpen] = useState(false);
   const [msgBoxLine, setMsgBoxLine] = useState("");
-  const openMsgBox = useCallback(({ line }) => {
+  const [msgBoxType, setMsgBoxType] = useState("normal"); // for day change
+  const openMsgBox = useCallback(({ line, type }) => {
     setIsMsgOpen(true);
-
     setMsgBoxLine(line);
+    setMsgBoxType(type);
   }, []);
 
   const closeMsgBox = () => {
@@ -57,14 +58,13 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       closeOutWindow();
       closeShopWindow();
       closeDataWindow();
+      setMsgBoxType("normal");
       openMsgBox({ line: message });
-      console.log(message);
     },
     [openMsgBox]
   );
 
-  //day update
-  useEffect(() => {
+  function updateDay() {
     if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day < 3) {
       const newStat = gameSystemData.day + 1;
       updateSystemData({
@@ -87,10 +87,12 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       setCharData(newCharData);
 
       closeAllWindow("Day updated. Added 200 coins.");
-    } else if (
-      gameSystemData.dailyWorkTimes === 3 &&
-      gameSystemData.day === 3
-    ) {
+    }
+  }
+
+  //go to ending
+  useEffect(() => {
+    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day === 3) {
       const ending = getEnding(charData);
       updateSystemData({
         day: 1,
@@ -173,6 +175,8 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
         isMsgOpen={isMsgOpen}
         msg={msgBoxLine}
         closeWindow={closeMsgBox}
+        boxType={msgBoxType}
+        updateDay={updateDay}
       />
       <div className="charContainer"></div>
       <div className="eventContainer">
