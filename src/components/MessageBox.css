@@ -16,6 +16,7 @@
   justify-content: space-between;
   background-color: #f8dad8;
   border-bottom: 4px solid black;
+  padding-left: 3%;
 }
 
 .msgContent {
@@ -25,5 +26,5 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1%;
+  padding: 5%;
 }
