@@ -41,10 +41,11 @@ export const dailyDateData = [
   },
 ];
 
-export const weeklyDate = [
+export const invitation = [
   {
     index: 0,
     dateDescription: "xxx1 invitation!",
+    dateDay: 2,
     choices: [
       {
         index: 0,
@@ -63,6 +64,7 @@ export const weeklyDate = [
   {
     index: 1,
     dateDescription: "xxx2 invitation!",
+    dateDay: 4,
     choices: [
       {
         index: 0,
@@ -81,6 +83,7 @@ export const weeklyDate = [
   {
     index: 2,
     dateDescription: "xxx3 invitation!",
+    dateDay: 6,
     choices: [
       {
         index: 0,
@@ -99,6 +102,7 @@ export const weeklyDate = [
   {
     index: 3,
     dateDescription: "xxx4 invitation!",
+    dateDay: 7,
     choices: [
       {
         index: 0,

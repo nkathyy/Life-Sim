@@ -1,6 +1,13 @@
 import "./MessageBox.css";
 
-const MessageBox = ({ isMsgOpen, msg, boxType, updateDay, closeWindow }) => {
+const MessageBox = ({
+  isMsgOpen,
+  msg,
+  boxType,
+  updateDay,
+  triggerInvitation,
+  closeWindow,
+}) => {
   return (
     isMsgOpen && (
       <div className="windowWrapper">
@@ -9,7 +16,13 @@ const MessageBox = ({ isMsgOpen, msg, boxType, updateDay, closeWindow }) => {
             <h2>{"Message"}</h2>
             <div
               className="boxes right"
-              onClick={boxType === "dayChange" ? updateDay : closeWindow}
+              onClick={
+                boxType === "dayChange"
+                  ? updateDay
+                  : boxType === "triggerInvitation"
+                  ? triggerInvitation
+                  : closeWindow
+              }
             >
               X
             </div>

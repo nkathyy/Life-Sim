@@ -6,8 +6,10 @@ import ShopWindow from "../components/ShopWindow.jsx";
 import { useEffect, useState, useCallback } from "react";
 import { baseData } from "../constants/baseData.js";
 import DataWindow from "../components/DataWindow.jsx";
+import InvitationCard from "../components/InvitationCard.jsx";
 import { dailyDateData } from "../constants/dateData.js";
 import { getEnding } from "../components/ending.js";
+import { invitation } from "../constants/dateData.js";
 
 const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
   const [isOutWindowOpen, setIsOutWindowOpen] = useState(false);
@@ -37,6 +39,18 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
     setIsDataWindowOpen(false);
   };
 
+  const [isInvitationCardOpen, setIsInvitationCardOpen] = useState(false);
+  const [invitationIndex, setInvitationIndex] = useState(0);
+  const invitationIndexList = invitation.map((date) => date.dateDay);
+  const openInvitationCard = (index) => {
+    setInvitationIndex(index);
+    setIsInvitationCardOpen(true);
+  };
+
+  const closeInvitationCard = () => {
+    setIsInvitationCardOpen(false);
+  };
+
   const [isMsgOpen, setIsMsgOpen] = useState(false);
   const [msgBoxLine, setMsgBoxLine] = useState("");
   const [msgBoxType, setMsgBoxType] = useState("normal"); // for day change
@@ -54,18 +68,24 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
   const [bag, setBag] = useState([]);
 
   const closeAllWindow = useCallback(
-    (message) => {
+    (newDay, message) => {
       closeOutWindow();
       closeShopWindow();
       closeDataWindow();
-      setMsgBoxType("normal");
-      openMsgBox({ line: message });
+      // setMsgBoxType("normal");
+
+      if (invitationIndexList.some((num) => num === newDay)) {
+        openMsgBox({ line: message, type: "triggerInvitation" });
+      } else {
+        openMsgBox({ line: message, type: "normal" });
+      }
     },
-    [openMsgBox]
+    [openMsgBox, invitationIndexList]
   );
 
+  //update Day
   function updateDay() {
-    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day < 3) {
+    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day < 10) {
       const newStat = gameSystemData.day + 1;
       updateSystemData({
         day: newStat,
@@ -86,13 +106,21 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       });
       setCharData(newCharData);
 
-      closeAllWindow("Day updated. Added 200 coins.");
+      closeAllWindow(newStat, "Day updated. Added 200 coins.");
     }
+  }
+
+  //invitation
+  function triggerInvitation() {
+    setMsgBoxType("normal");
+    closeMsgBox();
+
+    openInvitationCard(invitationIndexList.indexOf(gameSystemData.day));
   }
 
   //go to ending
   useEffect(() => {
-    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day === 3) {
+    if (gameSystemData.dailyWorkTimes === 3 && gameSystemData.day === 10) {
       const ending = getEnding(charData);
       updateSystemData({
         day: 1,
@@ -146,6 +174,11 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
 
   return (
     <>
+      <InvitationCard
+        isBoxOpen={isInvitationCardOpen}
+        item={invitation[invitationIndex]}
+        closeWindow={closeInvitationCard}
+      />
       <DataWindow
         DataList={charData}
         isDataWindowOpen={isDataWindowOpen}
@@ -174,9 +207,10 @@ const GameScreen = ({ gameSystemData, updateSystemData, toEndingFunction }) => {
       <MessageBox
         isMsgOpen={isMsgOpen}
         msg={msgBoxLine}
-        closeWindow={closeMsgBox}
         boxType={msgBoxType}
         updateDay={updateDay}
+        triggerInvitation={triggerInvitation}
+        closeWindow={closeMsgBox}
       />
       <div className="charContainer"></div>
       <div className="eventContainer">

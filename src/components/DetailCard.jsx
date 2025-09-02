@@ -1,9 +1,9 @@
 import Button from "./Button";
 import "./DetailCard.css";
 
-const DetailCard = ({ style, item, closeWindow, updateDailyWorkStat }) => {
+const DetailCard = ({ item, closeWindow, updateDailyWorkStat }) => {
   return (
-    <div className="cardWrapper" style={style}>
+    <div className="cardWrapper">
       <div className="card">
         <img src={item.imgSrc} alt="item logo" className="cardImg" />
         <h2>{item.displayName}</h2>
